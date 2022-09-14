@@ -1,0 +1,45 @@
+=====BFS=====
+//Enqueue_Start_Problem_in_OPEN
+enqueue(s, OPEN);
+//LOOP_start
+LOOP
+//IF_OPEN_empty
+    IF (OPEN is Empty OR memory_exhausted)
+//IF_OPEN_empty_true
+    THEN
+//return_fail
+        RETURN(Fail)
+//IF_OPEN_empty_end
+    ENDIF
+//Dequeue_OPEN_n
+    n = dequeue(OPEN)
+//PUSH_n_to_CLOSED
+    push(n, CLOSED)
+//FOR_Loop
+    FOREACH n_0 IN successors(n) DO
+//set_Backpointer
+        set_backpointer (n_0, n)
+//is_Goal_reached
+        IF *(n_0)
+//is_Goal_reached_true
+        THEN
+//return_goal
+            RETURN(n_0)
+//is_Goal_reached_end
+        ENDIF
+//is_n1_Deadend
+        IF dead_end(n_0)
+//is_n1_Deadend_true
+        THEN
+//cleanup_closed_deadend
+            cleanup_closed()
+//is_n1_Deadend_false
+        ELSE
+//Enqueue_n1_to_OPEN
+            enqueue(n_0, OPEN)
+//is_n1_Deadend_end
+        ENDIF
+//For_Loop_end
+    ENDFOR
+//LOOP_end
+EndLOOP

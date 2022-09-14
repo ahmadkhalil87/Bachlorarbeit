@@ -1,0 +1,3 @@
+time_out = 0
+cleanup_count = 5
+max_depth = 100

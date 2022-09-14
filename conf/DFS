@@ -1,0 +1,63 @@
+=====DFS=====
+//PUSH_Start_Problem_in_OPEN
+push(s, OPEN);
+//LOOP_start
+LOOP
+//IF_OPEN_Empty
+    IF (OPEN is Empty)
+//IF_OPEN_Empty_true
+    THEN
+//return_fail
+        RETURN(Fail)
+//IF_OPEN_Empty_end
+    ENDIF
+//POP_OPEN_n
+    n = pop(OPEN)
+//PUSH_n_to_CLOSED
+    push(n, CLOSED)
+//IF_Depth_reached
+    IF (depth(n) = k)
+//IF_Depth_reached_true
+    THEN
+//cleanup_closed_depth
+        cleanup_closed()
+//IF_Depth_reached_false
+    ELSE
+//For_Loop
+        FOREACH n_0 IN successors(n) DO
+//set_Backpointer
+            set_backpointer (n_0, n)
+//is_Goal_reached
+            IF *(n_0)
+//is_Goal_reached_true
+            THEN
+//return_goal
+                RETURN(n_0)
+//is_Goal_reached_end
+            ENDIF
+//is_n1_Deadend
+            IF deadend(n_0)
+//is_n1_Deadend_true
+            THEN
+//cleanup_closed_deadend
+                cleanup_closed()
+//is_n1_Deadend_false
+            ELSE
+//PUSH_n1_to_OPEN
+                push(n_0, OPEN)
+//is_n1_Deadend_end
+            ENDIF
+//For_Loop_end
+        ENDFOR
+//IF_n_has_no_successors
+        IF (successors(n) is Empty)
+//IF_n_has_no_successors_true
+        THEN
+//cleanup_closed_no_successors
+            cleanup_closed()
+//IF_n_has_no_successors_end
+        ENDIF
+//IF_Depth_reached_end
+    ENDIF
+//LOOP_end
+EndLOOP

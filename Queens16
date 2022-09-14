@@ -1,0 +1,3 @@
+NQueens
+size = 16
+queens_pos = (0, 0)
